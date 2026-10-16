@@ -67,9 +67,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # Pages on a private repo needs a paid plan; the site artifact above is
-    # still downloadable from the run if this job fails.
-    continue-on-error: true
+    # Pages on a private repo needs a paid plan, so deploy only once public.
+    # Until then download the `github-pages` artifact from the run to preview.
+    if: ${{ !github.event.repository.private }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
