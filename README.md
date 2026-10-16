@@ -1,15 +1,20 @@
-# Snowflake & Databricks in PostgreSQL
+# Who contributes to PostgreSQL
 
-A static dashboard of what Snowflake and Databricks contribute to PostgreSQL: code and
-reviews in core, talks at PostgreSQL events, and blog posts. Rebuilt daily by GitHub
-Actions from public sources and published with GitHub Pages.
+A static dashboard of which companies contribute to PostgreSQL: code and reviews in core,
+talks at PostgreSQL events, and blog posts. Rebuilt daily by GitHub Actions from public
+sources and published with GitHub Pages.
+
+Click companies in **Companies behind PostgreSQL** to select one or more; every view
+(KPIs, chart, changes, people, events, blog) follows the selection. Snowflake and Databricks
+are selected by default (`featured` in `config/companies.yml`). A selection can be shared as
+a link, e.g. `?c=Amazon,Microsoft#code`; `?c=` shows all companies.
 
 ## Credit
 
 The original idea, page design and counting rules come from Percona's
 [PostgreSQL activity dashboard](https://percona-lab.github.io/percona-pg-activity/)
 ([Percona-Lab/percona-pg-activity](https://github.com/Percona-Lab/percona-pg-activity)).
-This project adapts it to track Snowflake and Databricks. Person-to-company labels are
+This project adapts it into a generic, multi-company view. Person-to-company labels are
 also seeded from Percona's public `ranking.json`. Thank you, Percona.
 No code is copied from that project.
 
