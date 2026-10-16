@@ -4,10 +4,13 @@ A static dashboard of what Snowflake and Databricks contribute to PostgreSQL: co
 reviews in core, talks at PostgreSQL events, and blog posts. Rebuilt daily by GitHub
 Actions from public sources and published with GitHub Pages.
 
-Layout and counting rules follow the
-[Percona PostgreSQL activity dashboard](https://percona-lab.github.io/percona-pg-activity/)
+## Credit
+
+The original idea, page design and counting rules come from Percona's
+[PostgreSQL activity dashboard](https://percona-lab.github.io/percona-pg-activity/)
 ([Percona-Lab/percona-pg-activity](https://github.com/Percona-Lab/percona-pg-activity)).
-Person-to-company labels are seeded from Percona's public `ranking.json`. Thank you, Percona.
+This project adapts it to track Snowflake and Databricks. Person-to-company labels are
+also seeded from Percona's public `ranking.json`. Thank you, Percona.
 No code is copied from that project.
 
 ## How it is counted
