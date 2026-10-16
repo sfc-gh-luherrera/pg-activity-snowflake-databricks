@@ -1,0 +1,22 @@
+# Email domain -> company, used for the all-company leaderboard.
+# Personal domains (gmail.com etc.) are never attributed; use people.yml.
+microsoft.com: Microsoft
+amazon.com: Amazon
+amazon.de: Amazon
+enterprisedb.com: EDB
+highgo.ca: Highgo Software
+highgo.com: Highgo Software
+fujitsu.com: Fujitsu
+nttdata.com: NTT DATA
+oss.nttdata.com: NTT DATA
+percona.com: Percona
+postgrespro.ru: Postgres Professional
+google.com: Google
+motherduck.com: MotherDuck
+yandex-team.ru: Yandex
+supabase.io: Supabase
+supabase.com: Supabase
+snowflake.com: Snowflake
+crunchydata.com: Snowflake
+databricks.com: Databricks
+neon.tech: Databricks

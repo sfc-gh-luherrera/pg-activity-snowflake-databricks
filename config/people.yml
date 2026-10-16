@@ -1,0 +1,20 @@
+# Curated person -> company mapping. This is the primary attribution source,
+# because many contributors commit with personal addresses.
+# Fields: name (as in git trailers), aliases, company, from/to (ISO dates, optional),
+# via (acquired company -> legacy before its acquired_on), verified, source.
+#
+# Entries with verified: false MUST be checked before the repo goes public.
+# `python build/code.py --suggest` lists unmapped people with tracked-company emails.
+people:
+  - {name: Tom Lane, company: Snowflake, via: Crunchy Data, verified: false,
+     source: "percona ranking.json company label"}
+  - {name: Joe Conway, company: Snowflake, via: Crunchy Data, verified: false,
+     source: "public Crunchy Data affiliation (unconfirmed post-acquisition)"}
+  - {name: Heikki Linnakangas, company: Databricks, via: Neon, verified: false,
+     source: "percona ranking.json company label"}
+  - {name: Matthias van de Meent, company: Databricks, via: Neon, verified: false,
+     source: "percona ranking.json company label"}
+  - {name: Jeff Davis, company: Databricks, verified: false,
+     source: "percona ranking.json company label"}
+  - {name: Bohyun Lee, company: Databricks, verified: false,
+     source: "databricks.com commit email"}

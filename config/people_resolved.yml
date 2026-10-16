@@ -1,0 +1,20 @@
+# People resolved by manual lookup (public LinkedIn snippets, Sumble, conference bios,
+# GitHub profiles, mailing-list signatures). Fed from out/unresolved.yml, most active first.
+# company: Individual contributor = no employer could be confirmed (re-check periodically).
+# verified: false = evidence is weak or second-hand; confirm before the repo goes public.
+people:
+  - {name: Bruce Momjian, company: EDB, verified: false, source: "EDB bios; not re-confirmed for 2026"}
+  - {name: Alexander Lakhin, company: Postgres Professional, verified: false, source: "postgrespro.com list archives; weak"}
+  - {name: Henson Choi, company: INZENT, verified: false, source: "RocketReach: PostgreSQL core developer at INZENT"}
+  - {name: Paul A. Jungwirth, company: Individual contributor, verified: false, source: "Own consultancy (Illuminated Computing), PGConf.dev 2025 bio"}
+  - {name: Dean Rasheed, company: Individual contributor, verified: false, source: "GitHub bio: volunteer PostgreSQL contributor"}
+  - {name: Ewan Young, company: Individual contributor, verified: false, source: "no evidence found"}
+  - {name: Japin Li, company: Individual contributor, verified: false, source: "personal email, no employer on GitHub"}
+  - {name: Rui Zhao, company: Individual contributor, verified: false, source: "no evidence found"}
+  - {name: ChangAo Chen, company: Individual contributor, verified: false, source: "no evidence found"}
+  - {name: wenhui qiu, company: Individual contributor, verified: false, source: "personal email, no evidence found"}
+  - {name: Tatsuya Kawata, company: Individual contributor, verified: false, source: "no evidence found"}
+  - {name: David G. Johnston, company: Individual contributor, verified: false, source: "not yet researched"}
+  - {name: Mihail Nikalayeu, company: Individual contributor, verified: false, source: "PostgreSQL Europe member listing, no employer"}
+  - {name: Soumya S Murali, company: Individual contributor, verified: false, source: "LinkedIn title without employer"}
+  - {name: Chengpeng Yan, company: Individual contributor, verified: false, source: "GitHub bio without employer"}

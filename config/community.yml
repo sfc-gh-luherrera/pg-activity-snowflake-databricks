@@ -1,0 +1,16 @@
+# Community sources.
+# pgeu: conferences on the pgeu-system platform (postgresql.eu, postgresql.us,
+#   pgevents.ca, pgday.uk, ...). `sessions` is the conference "Sessions" page.
+# manual: talks, organising, volunteering and recognition not on those sites.
+pgeu:
+  - {name: PGConf.EU 2025, start: 2025-10-21, sessions: "https://www.postgresql.eu/events/pgconfeu2025/sessions/"}
+  - {name: PGConf.EU 2026, start: 2026-10-20, sessions: "https://www.postgresql.eu/events/pgconfeu2026/sessions/"}
+  - {name: pgDay Paris 2026, start: 2026-03-26, sessions: "https://www.postgresql.eu/events/pgdayparis2026/sessions/"}
+  - {name: PGConf.dev 2026, start: 2026-05-12, sessions: "https://www.pgevents.ca/events/pgconfdev2026/sessions/"}
+  - {name: PGConf.dev 2025, start: 2025-05-13, sessions: "https://www.pgevents.ca/events/pgconfdev2025/sessions/"}
+  - {name: PGConf NYC 2025, start: 2025-09-29, sessions: "https://postgresql.us/events/pgconfnyc2025/sessions/"}
+  - {name: PGDay UK 2025, start: 2025-09-09, sessions: "https://pgday.uk/events/pgdayuk2025/sessions/"}
+manual: []
+# Example manual entry:
+#  - {person: Tom Lane, kind: organiser, event: PGConf.dev 2026, date: 2026-05-12,
+#     url: "https://2026.pgconf.dev/"}

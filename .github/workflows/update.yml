@@ -1,0 +1,78 @@
+name: Daily rebuild
+
+on:
+  schedule:
+    - cron: "30 18 * * *"   # daily, 18:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Restore postgres clone
+        uses: actions/cache@v4
+        with:
+          path: pg
+          key: pg-${{ github.run_id }}
+          restore-keys: pg-
+      - name: Fetch postgres/postgres
+        run: |
+          if [ -d pg/.git ]; then git -C pg fetch -q --prune origin
+          else git clone -q --filter=blob:none --no-checkout https://github.com/postgres/postgres.git pg; fi
+
+      - name: Refresh seed labels (Percona-Lab ranking.json)
+        working-directory: build
+        run: python import_seed.py
+      - name: Code
+        working-directory: build
+        run: python code.py
+      - name: Community
+        working-directory: build
+        continue-on-error: true
+        run: python community.py
+      - name: Blog
+        working-directory: build
+        continue-on-error: true
+        run: python blog.py
+      - name: Aggregate
+        working-directory: build
+        run: python build.py
+
+      - name: Lookup queue (names to research)
+        uses: actions/upload-artifact@v4
+        with:
+          name: unresolved
+          path: out/unresolved.yml
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Pages on a private repo needs a paid plan; the site artifact above is
+    # still downloadable from the run if this job fails.
+    continue-on-error: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snowflake &amp; Databricks PostgreSQL Contributions</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <p class="eyebrow">SNOWFLAKE · DATABRICKS · POSTGRESQL COMMUNITY</p>
+  <h1>What Snowflake and Databricks contribute to PostgreSQL</h1>
+  <p class="lede">Code and reviews in PostgreSQL itself, talks at PostgreSQL events, and writing.
+    Everything here is collected automatically from public sources and rebuilt daily.</p>
+  <p class="meta" id="meta"></p>
+  <nav class="tabs">
+    <a href="#code" data-tab="code">Code by companies</a>
+    <a href="#people" data-tab="people">Code by people</a>
+    <a href="#community" data-tab="community">Events &amp; community</a>
+    <a href="#blog" data-tab="blog">Blog posts</a>
+  </nav>
+  <div class="controls">
+    <div class="seg" id="period"></div>
+    <div class="seg" id="company"></div>
+    <label class="check"><input type="checkbox" id="legacy" checked> Include legacy (Crunchy Data, Neon before acquisition)</label>
+    <label class="check"><input type="checkbox" id="self"> Count committers' own commits (no Author: trailer)</label>
+  </div>
+</header>
+
+<main>
+<section data-panel="code">
+  <div class="kpis" id="kpis"></div>
+  <h2>Activity per month</h2>
+  <p class="sub">Distinct changes authored or reviewed</p>
+  <div id="chart"></div>
+  <details><summary>View as table</summary><div id="chartTable"></div></details>
+  <h2>Companies behind PostgreSQL</h2>
+  <p class="sub">Top companies by distinct changes</p>
+  <div class="seg" id="rankBy"></div>
+  <ol class="rank" id="rank"></ol>
+  <h2>Where they work in PostgreSQL</h2>
+  <p class="sub">Parts of PostgreSQL touched by authored or reviewed changes</p>
+  <div class="areas" id="areas"></div>
+  <h2>The changes</h2>
+  <p class="sub">Every PostgreSQL change with Snowflake or Databricks credit, newest first.</p>
+  <div class="actions">
+    <button id="copyMd">Copy as Markdown</button>
+    <button id="dlCsv">Download CSV</button>
+    <span id="count"></span>
+    <span id="personFilter"></span>
+  </div>
+  <div id="changes"></div>
+  <button id="more" class="more">Show more</button>
+</section>
+
+<section data-panel="people" hidden>
+  <h2>Engineers</h2>
+  <p class="sub">Select a name to list that person's changes</p>
+  <table class="people"><thead><tr><th>Name</th><th>Company</th><th>Authored</th><th>Reviewed</th><th>Reported</th></tr></thead>
+    <tbody id="people"></tbody></table>
+</section>
+
+<section data-panel="community" hidden>
+  <h2>Events &amp; community</h2>
+  <p class="sub">Talks and roles at PostgreSQL conferences</p>
+  <div id="community"></div>
+</section>
+
+<section data-panel="blog" hidden>
+  <h2>Blog posts</h2>
+  <p class="sub">PostgreSQL posts on Planet PostgreSQL and company blogs</p>
+  <div id="blog"></div>
+</section>
+</main>
+
+<footer>
+  <p><strong>How this is counted.</strong> A change counts as authored when a tracked engineer is in its
+  <code>Author:</code> or <code>Co-authored-by:</code> trailer; optionally (toggle) also when they are the git author of a
+  commit without such a trailer (a committer's own work). Reviewed counts <code>Reviewed-by:</code>. A fix backpatched to several release
+  branches is counted once. Attribution uses a curated name list, manual lookups, company labels seeded from
+  <a href="https://github.com/Percona-Lab/percona-pg-activity">Percona-Lab/percona-pg-activity</a> (thanks, Percona),
+  and email domains; people with no confirmed employer are listed as <em>Individual contributor</em>. Work by Crunchy Data
+  (now Snowflake) and Neon (now Databricks) before their acquisitions is flagged <em>legacy</em>.</p>
+  <p>Data: <a href="data.json">data.json</a> · <a href="ranking.json">ranking.json</a> ·
+  <a href="community.json">community.json</a> · <a href="blog.json">blog.json</a> ·
+  <a href="stats.md">stats.md</a> · <a href="snowflake.csv">snowflake.csv</a> · <a href="databricks.csv">databricks.csv</a></p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

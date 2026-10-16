@@ -1,0 +1,18 @@
+# Tracked companies. Acquisitions: work by people of an acquired company is
+# attributed to the parent; work dated before `acquired_on` is flagged legacy.
+# Dates are announcement dates -- verify against closing dates before publishing.
+tracked:
+  Snowflake:
+    color: "#29B5E8"
+    domains: [snowflake.com]
+    acquisitions:
+      - name: Crunchy Data
+        domains: [crunchydata.com]
+        acquired_on: 2025-06-02
+  Databricks:
+    color: "#FF3621"
+    domains: [databricks.com]
+    acquisitions:
+      - name: Neon
+        domains: [neon.tech]
+        acquired_on: 2025-05-14

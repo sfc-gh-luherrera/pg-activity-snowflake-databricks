@@ -1,0 +1,12 @@
+# Blog feeds. planet: true -> filter by author via people.yml.
+# company: X -> whole feed belongs to X, filtered to Postgres topics;
+# legacy_before marks pre-acquisition posts. Verify feed URLs; failures are reported.
+feeds:
+  - {name: Planet PostgreSQL, url: "https://planet.postgresql.org/rss20.xml", planet: true}
+  - {name: Crunchy Data blog, url: "https://www.crunchydata.com/blog/rss.xml",
+     company: Snowflake, legacy_before: 2025-06-02}
+  - {name: Neon blog, url: "https://neon.com/blog/rss.xml",
+     company: Databricks, legacy_before: 2025-05-14}
+  - {name: Snowflake engineering blog, url: "https://www.snowflake.com/en/engineering-blog/feed/",
+     company: Snowflake}
+  - {name: Databricks blog, url: "https://www.databricks.com/feed", company: Databricks}
