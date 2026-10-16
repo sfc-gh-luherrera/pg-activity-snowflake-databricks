@@ -1,7 +1,9 @@
-# Tracked companies. Acquisitions: work by people of an acquired company is
-# attributed to the parent; work dated before `acquired_on` is flagged legacy.
-# Dates are announcement dates -- verify against closing dates before publishing.
-tracked:
+# Companies with special handling. `featured` companies are selected by default
+# on the site and get fixed colors and CSV exports. Acquisitions: work by people
+# of an acquired company is attributed to the parent; work dated before
+# `acquired_on` is flagged legacy. Any company can be listed here.
+# Dates are announcement dates -- verify against closing dates.
+featured:
   Snowflake:
     color: "#29B5E8"
     domains: [snowflake.com]
@@ -16,3 +18,6 @@ tracked:
       - name: Neon
         domains: [neon.tech]
         acquired_on: 2025-05-14
+
+# Colors for other selected companies, assigned in ranking order.
+palette: ["#7254A3", "#FF9F36", "#2E8B57", "#11567F", "#D45087", "#8C6D31", "#5B5B5B", "#B8860B"]

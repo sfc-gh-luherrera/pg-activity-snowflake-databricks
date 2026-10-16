@@ -23,7 +23,7 @@ class Attributor:
     """Resolve (name, email, date) -> (company, legacy, via)."""
 
     def __init__(self):
-        self.companies = load("companies.yml")["tracked"]
+        self.companies = load("companies.yml")["featured"]
         self.domains = {k.lower(): v for k, v in load("domains.yml").items()}
         self.people = {}
         # Precedence: curated people.yml, then manual lookups (people_resolved.yml,
@@ -73,5 +73,5 @@ class Attributor:
         return {"company": INDIVIDUAL, "legacy": False, "via": None}
 
     @property
-    def tracked(self):
+    def featured(self):
         return list(self.companies)

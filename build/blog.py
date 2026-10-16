@@ -1,6 +1,7 @@
-"""Collect PostgreSQL blog posts by tracked-company people / blogs.
+"""Collect PostgreSQL blog posts and attribute them to companies.
 
-Planet PostgreSQL posts are kept when the author maps to a tracked company.
+Planet PostgreSQL posts are attributed by author (Individual contributor when
+unknown); the site filters by the selected companies.
 Company blog feeds are kept when the post looks Postgres-related.
 Writes out/blog.json.
 """
@@ -50,8 +51,6 @@ def main():
                     str(f["legacy_before"])) if f.get("legacy_before") else False
             else:
                 r = att.resolve(author, "", d)
-                if r["company"] not in att.tracked:
-                    continue
                 company, legacy = r["company"], r["legacy"]
             seen.add(link)
             posts.append({"date": str(d), "title": title, "url": link,

@@ -1,5 +1,6 @@
-"""Collect talks by tracked-company people from conference session pages.
+"""Collect talks from conference session pages, attributing each speaker.
 
+All talks are kept; the site filters by the selected companies.
 Writes out/community.json. Sources that fail are recorded in `errors` and
 do not stop the build.
 """
@@ -13,7 +14,7 @@ import requests
 
 from common import OUT, Attributor, load
 
-SESSION = re.compile(r'<li><a href="(session/[^"]+)">(.*?)</a>\s*\(([^)]*)\)</li>', re.S)
+SESSION = re.compile(r'<li><a href="(session/[^"]+)">((?:(?!</li>).)*?)</a>\s*\(([^)]*)\)</li>', re.S)
 UA = {"User-Agent": "pg-activity-tracker (+github actions)"}
 
 
@@ -35,7 +36,6 @@ def main():
         try:
             for t in pgeu_talks(src):
                 hits = [{"name": n, **att.resolve(n, "", date)} for n in t["speakers"]]
-                hits = [h for h in hits if h["company"] in att.tracked]
                 if hits:
                     items.append({"kind": "talk", "event": src["name"],
                                   "date": str(date), "title": t["title"],

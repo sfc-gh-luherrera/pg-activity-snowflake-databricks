@@ -3,17 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Snowflake &amp; Databricks PostgreSQL Contributions</title>
+<title>Who contributes to PostgreSQL</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-  <p class="eyebrow">SNOWFLAKE · DATABRICKS · POSTGRESQL COMMUNITY</p>
-  <h1>What Snowflake and Databricks contribute to PostgreSQL</h1>
-  <p class="lede">Code and reviews in PostgreSQL itself, talks at PostgreSQL events, and writing.
-    Everything here is collected automatically from public sources and rebuilt daily.</p>
+  <p class="eyebrow">POSTGRESQL COMMUNITY · COMPANIES · PEOPLE</p>
+  <h1>Who contributes to PostgreSQL</h1>
+  <p class="lede">Code and reviews in PostgreSQL itself, talks at PostgreSQL events, and writing, by company.
+    Pick companies in <em>Companies behind PostgreSQL</em> to filter every view. Collected automatically from
+    public sources and rebuilt daily.</p>
   <p class="meta">Original idea and design by <a href="https://percona-lab.github.io/percona-pg-activity/">Percona's
-    PostgreSQL activity dashboard</a> — this is an adaptation for Snowflake and Databricks.</p>
+    PostgreSQL activity dashboard</a> — this is an adaptation with a multi-company selector.</p>
   <p class="meta" id="meta"></p>
   <nav class="tabs">
     <a href="#code" data-tab="code">Code by companies</a>
@@ -23,28 +24,28 @@
   </nav>
   <div class="controls">
     <div class="seg" id="period"></div>
-    <div class="seg" id="company"></div>
-    <label class="check"><input type="checkbox" id="legacy" checked> Include legacy (Crunchy Data, Neon before acquisition)</label>
+    <label class="check"><input type="checkbox" id="legacy" checked> Include legacy (work before an acquisition, e.g. Crunchy Data, Neon)</label>
     <label class="check"><input type="checkbox" id="self"> Count committers' own commits (no Author: trailer)</label>
   </div>
+  <div class="selection" id="selection"></div>
 </header>
 
 <main>
 <section data-panel="code">
   <div class="kpis" id="kpis"></div>
+  <h2>Companies behind PostgreSQL</h2>
+  <p class="sub">Top companies by distinct changes. Click companies to select one or more; every view follows the selection.</p>
+  <div class="seg" id="rankBy"></div>
+  <ol class="rank" id="rank"></ol>
   <h2>Activity per month</h2>
   <p class="sub">Distinct changes authored or reviewed</p>
   <div id="chart"></div>
   <details><summary>View as table</summary><div id="chartTable"></div></details>
-  <h2>Companies behind PostgreSQL</h2>
-  <p class="sub">Top companies by distinct changes</p>
-  <div class="seg" id="rankBy"></div>
-  <ol class="rank" id="rank"></ol>
   <h2>Where they work in PostgreSQL</h2>
   <p class="sub">Parts of PostgreSQL touched by authored or reviewed changes</p>
   <div class="areas" id="areas"></div>
   <h2>The changes</h2>
-  <p class="sub">Every PostgreSQL change with Snowflake or Databricks credit, newest first.</p>
+  <p class="sub" id="changesSub"></p>
   <div class="actions">
     <button id="copyMd">Copy as Markdown</button>
     <button id="dlCsv">Download CSV</button>
@@ -76,13 +77,13 @@
 </main>
 
 <footer>
-  <p><strong>How this is counted.</strong> A change counts as authored when a tracked engineer is in its
+  <p><strong>How this is counted.</strong> A change counts as authored for a company when one of its engineers is in the
   <code>Author:</code> or <code>Co-authored-by:</code> trailer; optionally (toggle) also when they are the git author of a
   commit without such a trailer (a committer's own work). Reviewed counts <code>Reviewed-by:</code>. A fix backpatched to several release
   branches is counted once. Attribution uses a curated name list, manual lookups, company labels seeded from
   <a href="https://github.com/Percona-Lab/percona-pg-activity">Percona-Lab/percona-pg-activity</a> (thanks, Percona),
-  and email domains; people with no confirmed employer are listed as <em>Individual contributor</em>. Work by Crunchy Data
-  (now Snowflake) and Neon (now Databricks) before their acquisitions is flagged <em>legacy</em>.</p>
+  and email domains; people with no confirmed employer are listed as <em>Individual contributor</em>. Work done at an
+  acquired company before the acquisition (Crunchy Data, now Snowflake; Neon, now Databricks) is flagged <em>legacy</em>.</p>
   <p>Data: <a href="data.json">data.json</a> · <a href="ranking.json">ranking.json</a> ·
   <a href="community.json">community.json</a> · <a href="blog.json">blog.json</a> ·
   <a href="stats.md">stats.md</a> · <a href="snowflake.csv">snowflake.csv</a> · <a href="databricks.csv">databricks.csv</a></p>

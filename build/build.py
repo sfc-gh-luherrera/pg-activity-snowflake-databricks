@@ -1,6 +1,6 @@
 """Aggregate out/*.json into the deployable dist/ folder.
 
-dist/data.json      tracked-company changes + metadata (period filtering is client side)
+dist/data.json      every change in compact form + metadata (filtering is client side)
 dist/ranking.json   per-month distinct authored/reviewed changes for every company
 dist/community.json, dist/blog.json
 dist/stats.md, dist/<company>.csv
@@ -21,9 +21,38 @@ def readj(name, default):
     return json.loads(p.read_text()) if p.exists() else default
 
 
+def slim(commits):
+    """Compact commits: people become [name, company index, flags, via?].
+
+    flags: 1 = legacy, 2 = committer's own commit (no Author: trailer).
+    """
+    names, idx = [], {}
+
+    def ci(co):
+        if co not in idx:
+            idx[co] = len(names)
+            names.append(co)
+        return idx[co]
+
+    def ppl(lst):
+        out = []
+        for p in lst:
+            row = [p["name"], ci(p["company"]), (1 if p.get("legacy") else 0) | (2 if p.get("self") else 0)]
+            if p.get("legacy") and p.get("via"):
+                row.append(p["via"])
+            out.append(row)
+        return out
+
+    rows = [{"h": c["sha"][:12], "d": c["date"], "s": c["subject"], "b": c["branches"],
+             "y": c["type"], "a": c["areas"], "A": ppl(c["authors"]), "R": ppl(c["reviewers"]),
+             "P": ppl(c["reporters"]), "D": c["discussion"][:1]} for c in commits]
+    return names, rows
+
+
 def main():
     code = readj("commits.json", {"commits": []})
-    companies = load("companies.yml")["tracked"]
+    cfg = load("companies.yml")
+    companies = cfg["featured"]
     tracked = set(companies)
     commits = code["commits"]
 
@@ -52,13 +81,15 @@ def main():
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     meta = {"generated_at": now, "head": code.get("head"), "head_date": code.get("head_date"),
             "since": code.get("since"), "master_version": code.get("master_version"),
-            "latest_stable": code.get("latest_stable"),
             "latest_stable": code.get("latest_stable"), "released_max": code.get("released_max"),
+            "featured": list(companies), "palette": cfg.get("palette", []),
             "companies": {k: {"color": v["color"],
                               "acquisitions": [{"name": a["name"], "acquired_on": str(a["acquired_on"])}
                                                for a in v.get("acquisitions", [])]}
                           for k, v in companies.items()}}
-    (DIST / "data.json").write_text(json.dumps({**meta, "commits": mine}))
+    co_names, rows = slim(commits)
+    (DIST / "data.json").write_text(json.dumps({**meta, "co": co_names, "commits": rows},
+                                               separators=(",", ":")))
     (DIST / "ranking.json").write_text(json.dumps(
         {"generated_at": now, "totals": totals, "individual": INDIVIDUAL,
          "credit": "Company labels seeded from Percona-Lab/percona-pg-activity ranking.json",
@@ -67,7 +98,7 @@ def main():
         (DIST / name).write_text(json.dumps(readj(name, {})))
 
     # CSV + Markdown summaries (all data since `since`)
-    lines = [f"# Snowflake & Databricks in PostgreSQL", f"Generated {now}, since {meta['since']}", ""]
+    lines = [f"# Who contributes to PostgreSQL", f"Generated {now}, since {meta['since']}", ""]
     for co in companies:
         rows = [c for c in mine if any(p["company"] == co for r in ("authors", "reviewers") for p in c[r])]
         with open(DIST / f"{co.lower()}.csv", "w", newline="") as fh:
@@ -92,7 +123,8 @@ def main():
     lines += [f"| {i} | {co} | {n} |" for i, (co, n) in
               enumerate(sorted(rank.items(), key=lambda x: -x[1])[:25], 1)]
     (DIST / "stats.md").write_text("\n".join(lines) + "\n")
-    print(f"dist/ written: {len(mine)} tracked changes of {len(commits)}")
+    print(f"dist/ written: {len(commits)} changes ({len(mine)} featured), "
+          f"data.json {(DIST / 'data.json').stat().st_size / 1e6:.1f} MB")
 
 
 if __name__ == "__main__":
