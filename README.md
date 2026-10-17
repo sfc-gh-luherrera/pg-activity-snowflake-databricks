@@ -1,7 +1,7 @@
 # Who contributes to PostgreSQL
 
 A static dashboard of which companies contribute to PostgreSQL: code and reviews in core,
-talks at PostgreSQL events, and blog posts. Rebuilt daily by GitHub Actions from public
+talks at PostgreSQL events, and blog posts. Rebuilt weekly by GitHub Actions from public
 sources and published with GitHub Pages.
 
 Click companies in **Companies behind PostgreSQL** to select one or more; every view

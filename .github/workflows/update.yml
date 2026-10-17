@@ -1,8 +1,8 @@
-name: Daily rebuild
+name: Weekly rebuild
 
 on:
   schedule:
-    - cron: "30 18 * * *"   # daily, 18:30 UTC
+    - cron: "30 18 * * 1"   # weekly, Mondays 18:30 UTC
   workflow_dispatch:
 
 permissions:
